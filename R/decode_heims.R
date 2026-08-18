@@ -43,7 +43,7 @@ decode_heims <- function(DT, show_progress = FALSE, check_valid = TRUE, selector
     # Consult the dictionary. If there is an ad_hoc_prepare
     # element, apply it now, otherwise leave as is.
     if ("ad_hoc_prepare" %in% names(heims_data_dict[[k]]) && is.function(heims_data_dict[[k]]$ad_hoc_prepare)){
-      set(DT, j = j, value = heims_data_dict[[k]]$ad_hoc_prepare(DT[[j]]))
+      set(DT, j = j, value = ensure_pkg_env(heims_data_dict[[k]]$ad_hoc_prepare)(DT[[j]]))
     }
   }
 
@@ -66,7 +66,7 @@ decode_heims <- function(DT, show_progress = FALSE, check_valid = TRUE, selector
 
       origcol_not_na <- origcol_not_na[!is.na(origcol_not_na)]
 
-      if (check_valid && length(origcol_not_na) > 0 && !dict_entry$validate(origcol_not_na)){
+      if (check_valid && length(origcol_not_na) > 0 && !ensure_pkg_env(dict_entry$validate)(origcol_not_na)){
         stop(orig, " was not validated.")
       }
 
@@ -85,7 +85,7 @@ decode_heims <- function(DT, show_progress = FALSE, check_valid = TRUE, selector
           DT <- D.T[DT]
         } else {
           if (is.function(dict_entry[["decoder"]])){
-            decoder_fn <- dict_entry[["decoder"]]
+            decoder_fn <- ensure_pkg_env(dict_entry[["decoder"]])
             DT <- decoder_fn(DT)
           }
         }
@@ -95,21 +95,22 @@ decode_heims <- function(DT, show_progress = FALSE, check_valid = TRUE, selector
         }
       } else {
         if ("mark_missing" %in% names(dict_entry)) {
+          mark_missing_fn <- ensure_pkg_env(dict_entry$mark_missing)
           switch(class(DT[[orig]]),
                  "logical" = {
-                   DT[, (orig) := if_else(dict_entry$mark_missing(DT[[orig]]), NA, DT[[orig]])]
+                   DT[, (orig) := if_else(mark_missing_fn(DT[[orig]]), NA, DT[[orig]])]
                  },
                  "integer" = {
-                   DT[, (orig) := if_else(dict_entry$mark_missing(DT[[orig]]), NA_integer_, DT[[orig]])]
+                   DT[, (orig) := if_else(mark_missing_fn(DT[[orig]]), NA_integer_, DT[[orig]])]
                  },
                  "integer64" = {
-                   DT[, (orig) := if_else(dict_entry$mark_missing(DT[[orig]]), as.integer64(NA), DT[[orig]])]
+                   DT[, (orig) := if_else(mark_missing_fn(DT[[orig]]), as.integer64(NA), DT[[orig]])]
                  },
                  "numeric" = {
-                   DT[, (orig) := if_else(dict_entry$mark_missing(DT[[orig]]), NA_real_, DT[[orig]])]
+                   DT[, (orig) := if_else(mark_missing_fn(DT[[orig]]), NA_real_, DT[[orig]])]
                  },
                  "character" = {
-                   DT[, (orig) := if_else(dict_entry$mark_missing(DT[[orig]]), NA_character_, DT[[orig]])]
+                   DT[, (orig) := if_else(mark_missing_fn(DT[[orig]]), NA_character_, DT[[orig]])]
                  })
         }
 

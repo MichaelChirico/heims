@@ -106,4 +106,11 @@ force_integer <- function(v){
 #' @export ymd
 ymd <- function(...) lubridate::ymd(...)
 
+ensure_pkg_env <- function(f) {
+  if (is.function(f) && identical(environment(f), .GlobalEnv)) {
+    environment(f) <- asNamespace("heims")
+  }
+  f
+}
+
 

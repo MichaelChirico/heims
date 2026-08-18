@@ -5,9 +5,9 @@ Date: 2018-02-03
 Authors@R: person("Hugh", "Parsonage", email = "hugh.parsonage@gmail.com", role = c("aut", "cre"))
 Description: Decode elements of the Australian Higher Education Information Management System (HEIMS) data for clarity and performance. HEIMS is the record system of the Department of Education, Australia to record enrolments and completions in Australia's higher education system, as well as a range of relevant information. For more information, including the source of the data dictionary, see <http://heimshelp.education.gov.au/sites/heimshelp/dictionary/pages/data-element-dictionary>.
 Depends: 
-  R (>= 3.4.0),
-  data.table
+  R (>= 3.4.0)
 Imports:
+  data.table,
   hutils,
   magrittr,
   fastmatch,
@@ -17,4 +17,4 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat, fst
-RoxygenNote: 6.0.1
+Config/roxygen2/version: 8.0.0
