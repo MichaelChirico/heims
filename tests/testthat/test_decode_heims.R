@@ -129,3 +129,26 @@ test_that("#19: Languages", {
 })
 
 
+
+test_that("dummy_enrol decodes and relevels end to end", {
+  # Nothing else in the suite exercises decode_heims() on data that ships with
+  # the package, so validator bugs went unnoticed while every test above was
+  # skipped for want of a local file.
+  decoded <- decode_heims(copy(dummy_enrol))
+  expect_true(is.data.table(decoded))
+  expect_equal(nrow(decoded), nrow(dummy_enrol))
+  expect_true("Gender" %in% names(decoded))
+
+  # relevel_heims() must tolerate a reference level that this 5-row extract
+  # simply does not contain (Language_home_group has no "English").
+  releveled <- relevel_heims(decoded)
+  expect_true(is.factor(releveled$Country_of_birth))
+  expect_equal(levels(releveled$Country_of_birth)[1], "Australia")
+})
+
+test_that("integer64 columns keep their class through decoding", {
+  # bit64 must be loaded (not merely Suggested by something else) or `[`
+  # dispatches to the default method and returns a bare double.
+  expect_true(is.integer64(dummy_enrol$E488))
+  expect_true(is.integer64(dummy_enrol$E488[c(TRUE, FALSE, TRUE, FALSE, TRUE)]))
+})

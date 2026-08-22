@@ -4,7 +4,9 @@
 \name{dummy_enrol}
 \alias{dummy_enrol}
 \title{Dummy enrolment file}
-\format{An object of class \code{data.table} (inherits from \code{data.frame}) with 5 rows and 56 columns.}
+\format{
+An object of class \code{data.table} (inherits from \code{data.frame}) with 5 rows and 56 columns.
+}
 \usage{
 dummy_enrol
 }

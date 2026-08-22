@@ -15,7 +15,6 @@
 #' X <- data.frame(E306 = as.integer(c(0, 1011, 999, 9998)))
 #' validate_elements(X)  # TRUE
 #'
-#' @import data.table
 #' @importFrom magrittr %>%
 #' @importFrom hutils if_else
 
