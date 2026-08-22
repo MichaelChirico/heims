@@ -16,7 +16,12 @@ relevel_heims <- function(DT){
     if (nom %in% first_levels$Variable){
       if (is.character(DT[[j]])){
         set(DT, j = j, value = as.factor(DT[[j]]))
-        set(DT, j = j, value = relevel(DT[[j]], ref = first_levels[Variable == nom][["First_level"]]))
+        ref <- first_levels[Variable == nom][["First_level"]]
+        # A subset of HEIMS need not contain every category, and relevel()
+        # errors outright if the intended reference level is absent.
+        if (ref %in% levels(DT[[j]])){
+          set(DT, j = j, value = relevel(DT[[j]], ref = ref))
+        }
       }
     }
   }

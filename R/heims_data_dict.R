@@ -19,6 +19,6 @@
 #' \item{\code{FOE}}{Field of education}
 #' \item{\code{Maj}}{Major}
 #' }
-#' @import data.table
+#' @importFrom data.table := %chin% .N .SD as.data.table between copy data.table fread haskey is.data.table key month rbindlist set setattr setcolorder setkey setkeyv setnames uniqueN year
 
 "heims_data_dict"

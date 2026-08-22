@@ -236,7 +236,7 @@ lapply(mget(ls(pattern = "decoder")), function(dt){
     stop("DT has non-unique key")
   }})
 
-devtools::use_data(E089_decoder,
+usethis::use_data(E089_decoder,
                    E095_decoder,
                    E306_decoder, HE_Provider_decoder,
                    E310_decoder,

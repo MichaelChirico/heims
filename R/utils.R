@@ -90,6 +90,10 @@ rm_leading_0s <- function(v){
 
 #' @rdname utilities
 #' @export as.integer64
+# The importFrom is what makes bit64 load with heims, which is what registers
+# its S3 methods. Without it, subsetting an integer64 column silently drops
+# through to the default `[` and returns a bare double.
+#' @importFrom bit64 integer64
 as.integer64 <- function(v) bit64::as.integer64(v)
 
 #' @rdname utilities

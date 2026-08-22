@@ -4,7 +4,9 @@
 \name{first_levels}
 \alias{first_levels}
 \title{First levels}
-\format{An object of class \code{data.table} (inherits from \code{data.frame}) with 8 rows and 2 columns.}
+\format{
+An object of class \code{data.table} (inherits from \code{data.frame}) with 8 rows and 2 columns.
+}
 \usage{
 first_levels
 }

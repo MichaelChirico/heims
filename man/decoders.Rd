@@ -33,7 +33,65 @@
 \alias{FOE_uniter}
 \alias{HE_Provider_decoder}
 \title{Decoders}
-\format{An object of class \code{data.table} (inherits from \code{data.frame}) with 2 rows and 2 columns.}
+\format{
+An object of class \code{data.table} (inherits from \code{data.frame}) with 2 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 2 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 632 rows and 4 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 26 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 7 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 5 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 6 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 8 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 3 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 3 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 3 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 299 rows and 3 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 13 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 5 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 7 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 139 rows and 9 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 5 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 12 rows and 4 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 439 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 439 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 53 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 6 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 3 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 12 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 10 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 10 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 2 rows and 2 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 439 rows and 4 columns.
+
+An object of class \code{data.table} (inherits from \code{data.frame}) with 632 rows and 4 columns.
+}
 \usage{
 E089_decoder
 

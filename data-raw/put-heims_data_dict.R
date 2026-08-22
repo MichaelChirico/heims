@@ -1,3 +1,9 @@
+# Keep source references: once the callbacks below are serialized into data/,
+# this file is the only place their code exists in readable form, so printing
+# heims_data_dict$E091$decoder should show it as written rather than deparsed.
+# (Rscript defaults keep.source to FALSE.)
+options(keep.source = TRUE)
+
 library(lubridate)
 library(magrittr)
 library(heims)
@@ -651,7 +657,7 @@ list(
   "E459" = list(long_name = "Campus_location",
                 orig_name = "E459",
                 mark_missing = never,
-                validate = function(v) is.integer(v) && between(v, 1L, 2L),
+                validate = function(v) is.integer(v) && all(between(v, 1L, 2L)),
                 decoder = data.table(E459 = c(1L, 2L),
                                      Campus_location = c("Australia", "Offshore"),
                                      key = "E459")),
@@ -663,7 +669,7 @@ list(
   "E487" = list(long_name = "Scholarship_type_cd",
                 orig_name = "E487",
                 mark_missing = never,
-                validate = function(v) is.integer(v) && v %in% c(0, 1, 2, 6, 7)),
+                validate = function(v) is.integer(v) && all(v %in% c(0, 1, 2, 6, 7))),
   "E488" = list(long_name = "CHESSN",
                 orig_name = "E488",
                 mark_missing = function(v) v == 0,
@@ -831,7 +837,7 @@ list(
   "E534" = list(long_name = "Course_start_date",
                 orig_name = "E534",
                 mark_missing = never,
-                validate = function(v) is.integer(v) && is.YearMonth(v),
+                validate = function(v) is.integer(v) && all(is.YearMonth(v)),
                 valid = function(v) is.YearMonth(v),
                 decoder = function(DT){
                   DT[, Course_start_date := ymd(E534 * 100 + 1)]
@@ -1195,4 +1201,18 @@ list(
                      })
 ) -> heims_data_dict
 
-devtools::use_data(heims_data_dict, overwrite = TRUE)
+# The dictionary's callbacks are closures created here, in the global
+# environment, but they are called from (and documented for use with) the
+# installed package, where they need to see heims' imports -- setnames(),
+# between(), %fin%, etc. Since heims only Imports data.table, the global
+# environment no longer reaches those names, so bind every callback to the
+# heims namespace before serializing. save() stores that as a namespace
+# *reference*, so the closures resolve against heims' imports on load,
+# whether or not data.table is attached.
+heims_data_dict <- lapply(heims_data_dict, function(entry) {
+  is_fun <- vapply(entry, is.function, logical(1))
+  entry[is_fun] <- lapply(entry[is_fun], `environment<-`, asNamespace("heims"))
+  entry
+})
+
+usethis::use_data(heims_data_dict, overwrite = TRUE, compress = "bzip2", version = 2)
